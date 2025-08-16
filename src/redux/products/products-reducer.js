@@ -5,7 +5,7 @@ const slice = createSlice({
   name: "products",
   initialState: {
     loading: false,
-    data: null,
+    data: {},
     error: null,
   },
   reducers: {
@@ -13,8 +13,9 @@ const slice = createSlice({
       state.loading = true;
     },
     fetchSuccess(state, action) {
+      const { categoryId, data } = action.payload;
       state.loading = false;
-      state.data = action.payload;
+      state.data[categoryId] = data;
       state.error = null;
     },
     fetchError(state, action) {
@@ -27,12 +28,14 @@ const slice = createSlice({
 
 const { fetchError, fetchStarted, fetchSuccess } = slice.actions;
 
-export const productsAsync = () => async (dispatch) => {
+export const homeProductsAsync = (productsCategory) => async (dispatch) => {
   try {
     dispatch(fetchStarted());
-    const response = await fetch("");
+    const response = await fetch(
+      `https://api.escuelajs.co/api/v1/products?offset=0&limit=4&categoryId=${productsCategory}`
+    );
     const data = await response.json();
-    return dispatch(fetchSuccess(data));
+    return dispatch(fetchSuccess({ categoryId: productsCategory, data }));
   } catch (error) {
     if (error instanceof Error) {
       dispatch(fetchError(error.message));
