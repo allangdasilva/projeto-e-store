@@ -1,0 +1,29 @@
+.header {
+  padding: 1rem;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.ul {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.liSearch {
+  flex-basis: 100%;
+  display: flex;
+  padding-inline: 1rem;
+
+  input {
+    flex: 1;
+    padding-inline: 1rem;
+    font-size: 1rem;
+    border-radius: 100px;
+    color: black;
+    background-color: white;
+  }
+}
