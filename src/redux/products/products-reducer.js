@@ -42,5 +42,19 @@ export const homeProductsAsync = (productsCategory) => async (dispatch) => {
     }
   }
 };
+export const productsAsync = (productsCategory) => async (dispatch) => {
+  try {
+    dispatch(fetchStarted());
+    const response = await fetch(
+      `https://api.escuelajs.co/api/v1/products?offset=0&limit=8&categoryId=${productsCategory}`
+    );
+    const data = await response.json();
+    return dispatch(fetchSuccess({ categoryId: productsCategory, data }));
+  } catch (error) {
+    if (error instanceof Error) {
+      dispatch(fetchError(error.message));
+    }
+  }
+};
 
 export default slice.reducer;

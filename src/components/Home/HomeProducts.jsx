@@ -11,7 +11,7 @@ const HomeProducts = ({ productsCategory, categoryName }) => {
   );
 
   React.useEffect(() => {
-    dispatch(homeProductsAsync(productsCategory));
+    //dispatch(homeProductsAsync(productsCategory));
   }, [dispatch, productsCategory]);
 
   if (!products) return null;
@@ -29,7 +29,7 @@ const HomeProducts = ({ productsCategory, categoryName }) => {
           </div>
         </div>
       ))}
-      <Link to={`/`}>Shop {categoryName}</Link>
+      <Link to={`/products/${productsCategory}`}>Shop {categoryName}</Link>
     </section>
   );
 };
