@@ -5,7 +5,7 @@
   gap: 1rem;
   padding: 4rem 1rem;
 
-  a {
+  button {
     grid-column: 1/-1;
   }
 }

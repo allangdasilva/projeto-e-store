@@ -1,0 +1,26 @@
+.productWrapper {
+  flex: 1;
+  border: 1px solid gainsboro;
+  padding: 1rem;
+
+  h3 {
+    margin-block: 1rem 0.5rem;
+  }
+  span {
+    display: inline-block;
+    margin-block: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    background-color: gray;
+  }
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.productDescription {
+  text-wrap: nowrap;
+  max-width: 20ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
