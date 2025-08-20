@@ -4,7 +4,9 @@ const slice = createSlice({
   name: "user",
   initialState: {
     loading: false,
-    data: null,
+    data: localStorage.getItem("token")
+      ? { access_token: localStorage.getItem("token") }
+      : null,
     error: null,
   },
   reducers: {
@@ -15,6 +17,7 @@ const slice = createSlice({
       state.loading = false;
       state.data = action.payload;
       state.error = null;
+      localStorage.setItem("token", action.payload.access_token);
     },
     fetchError(state, action) {
       state.loading = false;
