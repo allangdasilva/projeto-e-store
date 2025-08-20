@@ -6,7 +6,7 @@ const ProductWrapper = ({ products }) => {
       {products.map((product) => (
         <div className={style.productWrapper} key={product.id}>
           <img
-            src={product.images[0]}
+            src={product.images}
             alt={product.title}
             onError={(e) => (e.target.src = "/images/no-image-available.webp")}
           />
