@@ -12,6 +12,10 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  a {
+    text-wrap: nowrap;
+  }
 }
 .liSearch {
   flex-basis: 100%;

@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Shop from "./pages/Shop/Shop";
@@ -8,8 +9,16 @@ import Footer from "./components/Footer/Footer";
 import Cart from "./pages/Cart/Cart";
 import Favorites from "./pages/Favorites/Favorites";
 import Products from "./pages/Products/Products";
+import { useDispatch } from "react-redux";
+import { validateToken } from "./redux/user/user-reducer";
+import SignUp from "./pages/SignUp/SignUp";
 
 function App() {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(validateToken());
+  }, [dispatch]);
   return (
     <>
       <BrowserRouter>
@@ -18,6 +27,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/about" element={<About />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/cart" element={<Cart />} />

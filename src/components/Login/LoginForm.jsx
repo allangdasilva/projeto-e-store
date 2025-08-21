@@ -1,11 +1,13 @@
 import React from "react";
 import Input from "../Form/Input";
 import { useDispatch, useSelector } from "react-redux";
-import { userAsync } from "../../redux/user/user-reducer";
+import { userAsync, validateToken } from "../../redux/user/user-reducer";
 import Button from "../Form/Button";
 import { validateEmail, validatePassword } from "../Form/helper/regex";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [emailError, setEmailError] = React.useState(null);
@@ -27,6 +29,13 @@ const LoginForm = () => {
     }
   };
 
+  React.useEffect(() => {
+    if (data?.access_token) {
+      dispatch(validateToken());
+      navigate("/", { replace: true });
+    }
+  }, [data, dispatch]);
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -34,7 +43,7 @@ const LoginForm = () => {
           name={`email`}
           type={`email`}
           label={`Email`}
-          setPassword={setEmail}
+          onChange={({ target }) => setEmail(target.value)}
           value={email}
           autoComplete={`email`}
           onBlur={({ target }) => setEmailError(validateEmail(target.value))}
@@ -44,7 +53,7 @@ const LoginForm = () => {
           name={`password`}
           type={`password`}
           label={`Password`}
-          setPassword={setPassword}
+          onChange={({ target }) => setPassword(target.value)}
           value={password}
           autoComplete={`password`}
           onBlur={({ target }) =>

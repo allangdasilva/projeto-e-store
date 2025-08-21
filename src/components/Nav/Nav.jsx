@@ -1,8 +1,19 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import style from "./Nav.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/user/user-reducer";
 
 const Nav = () => {
+  const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login", { replace: true });
+  };
+
   return (
     <header className={style.header}>
       <nav className={style.nav}>
@@ -19,15 +30,30 @@ const Nav = () => {
             <input name="search" placeholder="Search..." type="search" />
             <button>Search</button>
           </li>
+          {data?.access_token && (
+            <li>
+              <NavLink to={`/favorites`}>Fav</NavLink>
+            </li>
+          )}
           <li>
-            <NavLink to={`/cart`}>Cart</NavLink>
+            {data?.access_token ? (
+              <NavLink to={`/cart`}>Cart</NavLink>
+            ) : (
+              <NavLink to={`/signup`}>Sign Up</NavLink>
+            )}
           </li>
           <li>
-            <NavLink to={`/login`}>Login</NavLink>
+            {data?.access_token ? (
+              <p>{data.name}</p>
+            ) : (
+              <NavLink to={`/login`}>Login</NavLink>
+            )}
           </li>
-          <li>
-            <NavLink to={`/favorites`}>Fav</NavLink>
-          </li>
+          {data?.access_token && (
+            <li>
+              <button onClick={handleLogout}>Logout</button>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

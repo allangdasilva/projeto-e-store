@@ -12,7 +12,7 @@ const HomeProducts = ({ productsCategory, categoryName }) => {
   );
 
   React.useEffect(() => {
-    dispatch(homeProductsAsync(productsCategory));
+    //dispatch(homeProductsAsync(productsCategory));
   }, [dispatch, productsCategory]);
 
   if (!products) return null;

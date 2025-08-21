@@ -13,7 +13,7 @@ const ProductsList = () => {
   const [itemsOffset, setItemsOffset] = React.useState(0);
 
   React.useEffect(() => {
-    dispatch(productsAsync(id, itemsOffset));
+    //dispatch(productsAsync(id, itemsOffset));
   }, [dispatch, id, itemsOffset]);
 
   if (!products) return null;
