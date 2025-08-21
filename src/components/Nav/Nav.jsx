@@ -2,11 +2,11 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import style from "./Nav.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../redux/user/user-reducer";
+import { logout } from "../../redux/user/login-reducer";
 
 const Nav = () => {
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.user);
+  const { data } = useSelector((state) => state.login);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -35,18 +35,19 @@ const Nav = () => {
               <NavLink to={`/favorites`}>Fav</NavLink>
             </li>
           )}
+
           <li>
             {data?.access_token ? (
               <NavLink to={`/cart`}>Cart</NavLink>
             ) : (
-              <NavLink to={`/signup`}>Sign Up</NavLink>
+              <NavLink to={`/login`}>Login</NavLink>
             )}
           </li>
           <li>
             {data?.access_token ? (
               <p>{data.name}</p>
             ) : (
-              <NavLink to={`/login`}>Login</NavLink>
+              <NavLink to={`/signup`}>Sign Up</NavLink>
             )}
           </li>
           {data?.access_token && (

@@ -1,7 +1,7 @@
 import React from "react";
 import Input from "../Form/Input";
 import { useDispatch, useSelector } from "react-redux";
-import { userAsync, validateToken } from "../../redux/user/user-reducer";
+import { loginAsync, validateToken } from "../../redux/user/login-reducer";
 import Button from "../Form/Button";
 import { validateEmail, validatePassword } from "../Form/helper/regex";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ const LoginForm = () => {
   const [passwordError, setPasswordError] = React.useState(null);
 
   const dispatch = useDispatch();
-  const { loading, data, error } = useSelector((state) => state.user);
+  const { loading, data, error } = useSelector((state) => state.login);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,7 +25,7 @@ const LoginForm = () => {
     setPasswordError(passwordValidation);
 
     if (!emailValidation && !passwordValidation) {
-      dispatch(userAsync(email, password));
+      dispatch(loginAsync(email, password));
     }
   };
 

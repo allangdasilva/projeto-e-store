@@ -10,7 +10,7 @@ import Cart from "./pages/Cart/Cart";
 import Favorites from "./pages/Favorites/Favorites";
 import Products from "./pages/Products/Products";
 import { useDispatch } from "react-redux";
-import { validateToken } from "./redux/user/user-reducer";
+import { validateToken } from "./redux/user/login-reducer";
 import SignUp from "./pages/SignUp/SignUp";
 
 function App() {

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const slice = createSlice({
-  name: "user",
+  name: "login",
   initialState: {
     loading: false,
     data: localStorage.getItem("token")
@@ -33,9 +33,10 @@ const slice = createSlice({
   },
 });
 
-export const { fetchStarted, fetchSuccess, fetchError, logout } = slice.actions;
+export const { logout } = slice.actions;
+const { fetchStarted, fetchSuccess, fetchError } = slice.actions;
 
-export const userAsync = (email, password) => async (dispatch) => {
+export const loginAsync = (email, password) => async (dispatch) => {
   try {
     dispatch(fetchStarted());
     const response = await fetch("https://api.escuelajs.co/api/v1/auth/login", {
@@ -48,7 +49,10 @@ export const userAsync = (email, password) => async (dispatch) => {
         password,
       }),
     });
-    if (!response.ok) throw new Error("Login Failed");
+    if (!response.ok) {
+      const dataError = await response.json();
+      throw new Error(dataError?.message);
+    }
     const data = await response.json();
     return dispatch(fetchSuccess(data));
   } catch (error) {
@@ -72,10 +76,13 @@ export const validateToken = () => async (dispatch) => {
         },
       }
     );
-    if (!response.ok) throw new Error("Invalid Token");
+    if (!response.ok) {
+      const dataError = await response.json();
+      throw new Error(dataError?.message);
+    }
 
     const data = await response.json();
-    dispatch(fetchSuccess({ ...data, access_token: token }));
+    return dispatch(fetchSuccess({ ...data, access_token: token }));
   } catch (error) {
     if (error instanceof Error) {
       dispatch(fetchError(error.message));

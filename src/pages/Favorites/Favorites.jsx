@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Favorites = () => {
-  const { data } = useSelector((state) => state.user);
+  const { data } = useSelector((state) => state.login);
   const navigate = useNavigate();
 
   React.useEffect(() => {
