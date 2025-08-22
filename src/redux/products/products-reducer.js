@@ -37,7 +37,7 @@ export const homeProductsAsync = (productsCategory) => async (dispatch) => {
   try {
     dispatch(fetchStarted());
     const response = await fetch(
-      `https://api.escuelajs.co/api/v1/products?offset=0&limit=4&categoryId=${productsCategory}`
+      `https://api.escuelajs.co/api/v1/products?offset=0&limit=4&categorySlug=${productsCategory}`
     );
     if (!response.ok) {
       const dataError = await response.json();
@@ -57,7 +57,7 @@ export const productsAsync =
     try {
       dispatch(fetchStarted());
       const response = await fetch(
-        `https://api.escuelajs.co/api/v1/products?offset=${itemsOffset}&limit=4&categoryId=${productsCategory}`
+        `https://api.escuelajs.co/api/v1/products?offset=${itemsOffset}&limit=4&categorySlug=${productsCategory}`
       );
       if (!response.ok) {
         const dataError = await response.json();

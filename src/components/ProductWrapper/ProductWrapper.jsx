@@ -1,6 +1,10 @@
+import { useDispatch, useSelector } from "react-redux";
 import style from "./ProductWrapper.module.css";
+import { addToCart, removeFromCart } from "../../redux/cart/cart-reducer";
 
 const ProductWrapper = ({ products }) => {
+  const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.cart);
   return (
     <>
       {products.map((product) => (
@@ -15,7 +19,15 @@ const ProductWrapper = ({ products }) => {
           <span>{product.category.name}</span>
           <div>
             <p>${product.price}</p>
-            <button>Add to Cart</button>
+            {data[product.id]?.id === product.id ? (
+              <button onClick={() => dispatch(removeFromCart(product))}>
+                Remove from Cart
+              </button>
+            ) : (
+              <button onClick={() => dispatch(addToCart(product))}>
+                Add to Cart
+              </button>
+            )}
           </div>
         </div>
       ))}

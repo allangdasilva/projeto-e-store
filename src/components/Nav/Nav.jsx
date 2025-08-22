@@ -3,10 +3,12 @@ import { NavLink, useNavigate } from "react-router-dom";
 import style from "./Nav.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/user/login-reducer";
+import { selectTotalProducts } from "../../redux/cart/cart-selector";
 
 const Nav = () => {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.login);
+  const totalProducts = useSelector(selectTotalProducts);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -38,7 +40,7 @@ const Nav = () => {
 
           <li>
             {data?.access_token ? (
-              <NavLink to={`/cart`}>Cart</NavLink>
+              <NavLink to={`/cart`}>Cart ({totalProducts})</NavLink>
             ) : (
               <NavLink to={`/login`}>Login</NavLink>
             )}

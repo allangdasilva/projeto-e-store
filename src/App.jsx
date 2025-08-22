@@ -12,6 +12,7 @@ import Products from "./pages/Products/Products";
 import { useDispatch } from "react-redux";
 import { validateToken } from "./redux/user/login-reducer";
 import SignUp from "./pages/SignUp/SignUp";
+import Checkout from "./pages/Checkout/Checkout";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ function App() {
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/products/:id" element={<Products />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
         <Footer />
       </BrowserRouter>

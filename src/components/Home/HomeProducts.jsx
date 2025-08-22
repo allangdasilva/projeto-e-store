@@ -5,21 +5,21 @@ import style from "./HomeProducts.module.css";
 import { Link } from "react-router-dom";
 import ProductWrapper from "../ProductWrapper/ProductWrapper";
 
-const HomeProducts = ({ productsCategory, categoryName }) => {
+const HomeProducts = ({ productsCategory }) => {
   const dispatch = useDispatch();
   const products = useSelector(
     (state) => state.products.data[productsCategory]
   );
 
   React.useEffect(() => {
-    //dispatch(homeProductsAsync(productsCategory));
+    dispatch(homeProductsAsync(productsCategory));
   }, [dispatch, productsCategory]);
 
   if (!products) return null;
   return (
     <section className={style.section}>
       <ProductWrapper products={products} />
-      <Link to={`/products/${productsCategory}`}>Shop {categoryName}</Link>
+      <Link to={`/products/${productsCategory}`}>Shop {productsCategory}</Link>
     </section>
   );
 };
