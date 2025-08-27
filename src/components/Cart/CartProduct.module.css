@@ -1,0 +1,13 @@
+.li {
+  display: flex;
+  gap: 1rem;
+
+  img {
+    max-width: 100px;
+  }
+}
+.liCounter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

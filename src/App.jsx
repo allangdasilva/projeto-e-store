@@ -13,12 +13,15 @@ import { useDispatch } from "react-redux";
 import { validateToken } from "./redux/user/login-reducer";
 import SignUp from "./pages/SignUp/SignUp";
 import Checkout from "./pages/Checkout/Checkout";
+import SearchResults from "./components/Nav/SearchResults";
+import { productsAsync } from "./redux/products/products";
 
 function App() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(validateToken());
+    dispatch(productsAsync());
   }, [dispatch]);
   return (
     <>
@@ -34,6 +37,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/products/:id" element={<Products />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/search" element={<SearchResults />} />
         </Routes>
         <Footer />
       </BrowserRouter>

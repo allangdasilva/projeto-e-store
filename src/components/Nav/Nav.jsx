@@ -4,6 +4,7 @@ import style from "./Nav.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/user/login-reducer";
 import { selectTotalProducts } from "../../redux/cart/cart-selector";
+import SearchBar from "./SearchBar";
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -29,8 +30,7 @@ const Nav = () => {
             <NavLink to={`/about`}>About</NavLink>
           </li>
           <li className={style.liSearch}>
-            <input name="search" placeholder="Search..." type="search" />
-            <button>Search</button>
+            <SearchBar />
           </li>
           {data?.access_token && (
             <li>

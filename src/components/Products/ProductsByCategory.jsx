@@ -1,19 +1,19 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { productsAsync } from "../../redux/products/products-reducer";
-import ProductWrapper from "../ProductWrapper/ProductWrapper";
 import style from "./ProductsList.module.css";
+import ProductWrapper from "./ProductWrapper";
+import { productsByCategoryAsync } from "../../redux/products/products-filtered-reducer";
 
 const ProductsList = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products.data[id]);
-  const { hasMore } = useSelector((state) => state.products);
+  const products = useSelector((state) => state.products_filtered.data[id]);
+  const { hasMore } = useSelector((state) => state.products_filtered);
   const [itemsOffset, setItemsOffset] = React.useState(0);
 
   React.useEffect(() => {
-    //dispatch(productsAsync(id, itemsOffset));
+    dispatch(productsByCategoryAsync(id, itemsOffset));
   }, [dispatch, id, itemsOffset]);
 
   if (!products) return null;

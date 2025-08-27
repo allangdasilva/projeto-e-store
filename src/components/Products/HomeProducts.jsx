@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { homeProductsAsync } from "../../redux/products/products-reducer";
+import { homeProductsAsync } from "../../redux/products/products-filtered-reducer";
 import style from "./HomeProducts.module.css";
 import { Link } from "react-router-dom";
-import ProductWrapper from "../ProductWrapper/ProductWrapper";
+import ProductWrapper from "./ProductWrapper";
 
 const HomeProducts = ({ productsCategory }) => {
   const dispatch = useDispatch();
   const products = useSelector(
-    (state) => state.products.data[productsCategory]
+    (state) => state.products_filtered.data[productsCategory]
   );
 
   React.useEffect(() => {

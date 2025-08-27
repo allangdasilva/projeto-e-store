@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const slice = createSlice({
-  name: "products",
+  name: "products_filtered",
   initialState: {
     loading: false,
     data: {},
@@ -52,7 +52,7 @@ export const homeProductsAsync = (productsCategory) => async (dispatch) => {
     }
   }
 };
-export const productsAsync =
+export const productsByCategoryAsync =
   (productsCategory, itemsOffset) => async (dispatch) => {
     try {
       dispatch(fetchStarted());
